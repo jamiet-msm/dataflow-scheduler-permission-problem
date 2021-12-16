@@ -131,7 +131,7 @@ resource "google_cloud_scheduler_job" "trigger_dataflow_job_via_api" {
             inputFilePattern                    = "${google_storage_bucket.bucket.url}/${google_storage_bucket_object.lorem_ipsum.name}"
           }
           environment = {
-            tempLocation        = "gs://dataflow-templates/latest/GCS_Text_to_BigQuery"
+            tempLocation        = "gs://${google_storage_bucket.bucket.id}/tmp_dir"
             network             = google_compute_network.network.name
             serviceAccountEmail = google_service_account.sa.email
           }
