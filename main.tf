@@ -154,15 +154,6 @@ resource "google_project_iam_member" "sa_may_act_as_any_service_account" {
   member             = "serviceAccount:${google_service_account.sa.email}"
 }
 
-resource "google_project_iam_member" "df_admin" {
-  role               = "roles/dataflow.admin"
-  member             = "serviceAccount:${google_service_account.sa.email}"
-}
-
-# resource "google_project_iam_member" "cloudscheduler_admin" {
-#   role               = "roles/cloudscheduler.admin"
-#   member             = "serviceAccount:${google_service_account.sa.email}"
-# }
 
 
 
