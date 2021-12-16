@@ -10,5 +10,13 @@ export REGION=your_gcp_region #e.g. europe-west2, us-central1, etc...
 export NETWORK=your_network
 export SUBNETWORK=your_subnetwork
 docker run -it -v $(pwd):/tf -w /tf hashicorp/terraform init 
-docker run -it -v ~/.config/gcloud:/root/.config/gcloud -v $(pwd):/tf -w /tf hashicorp/terraform apply -var project=${PROJECT} -var region=${REGION} -var network=${NETWORK} -auto-approve -var subnetwork=${SUBNETWORK}
+docker run -it -v ~/.config/gcloud:/root/.config/gcloud \
+        -v $(pwd):/tf \
+        -w /tf \
+        hashicorp/terraform apply \
+        -var project=${PROJECT} \
+        -var region=${REGION} \
+        -var network=${NETWORK} \
+        -var subnetwork=${SUBNETWORK} \
+        -auto-approve
 ```
