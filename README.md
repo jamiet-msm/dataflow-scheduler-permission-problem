@@ -6,8 +6,10 @@ The commands below can be used to deploy the terraform configuration herein. I d
 docker image `hashicorp/terraform` rather than assuming one would have `terraform` installed
 however one would still need docker installed.
 
+You will also need to have the [Google Cloud SDK (aka `gcloud`)](https://cloud.google.com/sdk) installed.
+
 ```bash
-export PROJECT=your_gcp_project
+export PROJECT=$(gcloud config get-value core/project) # or whatever project you wish to use
 export REGION=your_gcp_region #e.g. europe-west2, us-central1, etc...
 docker run -it -v $(pwd):/tf -w /tf hashicorp/terraform init 
 docker run -it -v ~/.config/gcloud:/root/.config/gcloud \
