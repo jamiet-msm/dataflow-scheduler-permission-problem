@@ -67,8 +67,8 @@ resource "google_service_account" "sa" {
   account_id = "dataflow-demo"
 }
 
-resource "google_project_iam_member" "df_worker" {
-  role   = "roles/dataflow.worker"
+resource "google_project_iam_member" "df_admin" {
+  role   = "roles/dataflow.admin"
   member = "serviceAccount:${google_service_account.sa.email}"
 }
 
@@ -99,7 +99,7 @@ resource "google_dataflow_job" "dataflow_job" {
   }
   on_delete = "cancel"
   depends_on = [
-    google_project_iam_member.df_worker, google_project_iam_member.storage_admin, google_project_iam_member.bq_admin
+    google_project_iam_member.df_admin, google_project_iam_member.storage_admin, google_project_iam_member.bq_admin
   ]
 }
 
@@ -144,16 +144,10 @@ resource "google_cloud_scheduler_job" "trigger_dataflow_job_via_api" {
   }
 }
 
-
-
-data "google_project" "project" {}
-
-  
-resource "google_project_iam_member" "sa_may_act_as_any_service_account" {
+resource "google_service_account_iam_member" "sa_may_act_as_itself" {
+  service_account_id = google_service_account.sa.name
   role               = "roles/iam.serviceAccountUser"
   member             = "serviceAccount:${google_service_account.sa.email}"
 }
-
-
 
 
