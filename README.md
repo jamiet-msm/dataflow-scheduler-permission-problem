@@ -26,3 +26,8 @@ If the Dataflow job runs successfully then there should be some data in the BigQ
 ```bash
 bq query --nouse_legacy_sql "select count(*) from ${PROJECT}.dataflow_demo.t"
 ```
+
+destroy it all again:
+```
+docker run -it -v ~/.config/gcloud:/root/.config/gcloud -v $(pwd):/tf -w /tf hashicorp/terraform destroy -var project=${PROJECT} -var region=${REGION} -auto-approve
+```
